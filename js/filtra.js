@@ -9,8 +9,9 @@ campoFiltro.addEventListener("input", function(){
             var paciente = pacientes[i];
             var tdNome = paciente.querySelector(".info-nome");
             var nome = tdNome.textContent;
-            if(nome != this.value){
-                paciente.classList.add("invisivel")
+            var expressao = new RegExp(this.value, "i"); //Criação de Expressão Regular (RegEx)
+            if(!expressao.test(nome)){ //Testa a variável nome
+                paciente.classList.add("invisivel");
             }else{
                 paciente.classList.remove("invisivel");
             }
@@ -22,3 +23,19 @@ campoFiltro.addEventListener("input", function(){
         }
     }
 });
+
+
+/* Alternativa à RegEx = método substr() (substring):
+
+var comparavel = nome.substr(0, this.value.length);
+var comparavelMinusculo = comparavel.toLowerCase();
+var valorDigitadoMinusculo = this.value.toLowerCase();
+
+if (!(valorDigitadoMinusculo == comparavelMinusculo)) {
+    paciente.classList.add("invisivel");
+} else{
+    paciente.classList.remove("invisivel");
+}
+
+*/
+
